@@ -64,17 +64,25 @@ struct PlayerView: View {
             }
             .padding(.horizontal, 28)
 
-            // transport
-            HStack(spacing: 52) {
-                Button { player.prev(api: api) } label: {
-                    Image(systemName: "backward.fill").font(.system(size: 26))
-                }
-                Button { player.toggle() } label: {
-                    Image(systemName: player.playing ? "pause.circle.fill" : "play.circle.fill")
-                        .font(.system(size: 72))
-                }
-                Button { player.next(api: api) } label: {
-                    Image(systemName: "forward.fill").font(.system(size: 26))
+            // transport — liquid glass pad
+            GlassEffectContainer {
+                HStack(spacing: 44) {
+                    Button { player.prev(api: api) } label: {
+                        Image(systemName: "backward.fill").font(.system(size: 24))
+                            .frame(width: 56, height: 56)
+                    }
+                    .glassEffect(.regular.interactive())
+                    Button { player.toggle() } label: {
+                        Image(systemName: player.playing ? "pause.fill" : "play.fill")
+                            .font(.system(size: 34))
+                            .frame(width: 84, height: 84)
+                    }
+                    .glassEffect(.regular.tint(Theme.accent.opacity(0.35)).interactive())
+                    Button { player.next(api: api) } label: {
+                        Image(systemName: "forward.fill").font(.system(size: 24))
+                            .frame(width: 56, height: 56)
+                    }
+                    .glassEffect(.regular.interactive())
                 }
             }
             .foregroundStyle(Theme.ink)
